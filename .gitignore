@@ -1,0 +1,9 @@
+# env files
+.env
+
+# node_modules
+lambda/node_modules
+
+# ask-cli
+.ask/
+ask-resources.json
