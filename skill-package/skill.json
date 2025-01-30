@@ -11,19 +11,20 @@
     },
     "manifestVersion": "1.0",
     "publishingInformation": {
-      "distributionCountries": [],
-      "isAvailableWorldwide": true,
+      "distributionCountries": [
+        "US"
+      ],
+      "isAvailableWorldwide": false,
       "locales": {
         "en-US": {
-          "description": "Sample Full Description",
+          "description": "What's for lunch in Arlington Elementary schools?",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa open arlington lunch",
+            "What's for lunch?"
           ],
           "keywords": [],
-          "name": "What\u0027s for lunch?",
-          "summary": "Sample Short Description"
+          "name": "Arlington Lunch",
+          "summary": "What's for lunch in Arlington Elementary schools?"
         }
       },
       "testingInstructions": "Sample Testing Instructions."
