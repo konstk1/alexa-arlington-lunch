@@ -1,8 +1,9 @@
 # env files
 .env
 
-# node_modules
+# node_modules and build folder
 lambda/node_modules
+lambda/dist
 
 # ask-cli
 .ask/

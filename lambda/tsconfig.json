@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+      /* Base Options: */
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "target": "es2022",
+      "resolveJsonModule": true,
+      "moduleDetection": "force",
+      "isolatedModules": true,
+  
+      /* Strictness */
+      "strict": true,
+      "noUncheckedIndexedAccess": true,
+  
+      /* Bundled projects */
+      "lib": ["es2023"],
+      "module": "node16",
+      "incremental": true,
+  
+      /* Path Aliases */
+      "rootDir": ".",
+      "outDir": "./dist"
+    },
+    // "include": [
+    //   ".eslintrc.cjs",
+    //   "**/*.ts",
+    //   "**/*.tsx",
+    //   "**/*.cjs",
+    //   "**/*.js"
+    // ],
+    "exclude": ["node_modules"]
+  }
+  

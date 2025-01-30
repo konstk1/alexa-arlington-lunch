@@ -55,8 +55,9 @@
           "slots": [],
           "name": "AskAboutLunchIntent",
           "samples": [
-            "What\u0027s for lunch",
-            "What\u0027s for lunch today"
+            "What's for lunch",
+            "What's for lunch today",
+            "What's for lunch at kindergarten"
           ]
         }
       ],
