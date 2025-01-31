@@ -6,17 +6,18 @@
 import { SkillBuilders, getRequestType, getIntentName } from 'ask-sdk-core'
 import { HandlerInput, RequestHandler, ErrorHandler as AlexaErrorHandler } from 'ask-sdk-core'
 import { Response } from 'ask-sdk-model'
+import { generateGoodbye } from './helpers'
 
 const LaunchRequestHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput): boolean {
     return getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
   },
   handle(handlerInput: HandlerInput): Response {
-    const speakOutput = 'I\'m still learning about lunch in Arlington. Try again later.'
+    const speakOutput = 'I\'m still learning about lunch in Arlington. Try again later. ' + generateGoodbye(true)
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
-      .reprompt(speakOutput)
+      .withShouldEndSession(true)
       .getResponse()
   }
 }
@@ -54,16 +55,7 @@ const CancelAndStopIntentHandler: RequestHandler = {
         || getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent')
   },
   handle(handlerInput: HandlerInput): Response {
-    const goodbyes = [
-      'Goodbye!',
-      'Bye!',
-      'See you later, alligator!',
-      'Have a great day!',
-      'See ya!',
-      'Bye bye, butterfly!',
-      'Toodles'
-    ]
-    const speakOutput = goodbyes[Math.floor(Math.random() * goodbyes.length)] ?? 'Goodbye!'
+    const speakOutput = generateGoodbye(true)
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
