@@ -12,7 +12,7 @@ const LaunchRequestHandler: RequestHandler = {
         return getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput: HandlerInput): Response {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput = 'I\'m still learning about lunch in Arlington. Try again later.';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -27,23 +27,8 @@ const AskAboutLunchIntentHandler: RequestHandler = {
             && getIntentName(handlerInput.requestEnvelope) === 'AskAboutLunchIntent';
     },
     handle(handlerInput: HandlerInput): Response {
-        const speakOutput = `I'm still learning about lunch in Arlington. Try again later.`;
+        const speakOutput = 'I\'m still learning about lunch in Arlington. Try again later.';
         return handlerInput.responseBuilder.speak(speakOutput).getResponse();
-    }
-};
-
-const HelloWorldIntentHandler: RequestHandler = {
-    canHandle(handlerInput: HandlerInput): boolean {
-        return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
-    },
-    handle(handlerInput: HandlerInput): Response {
-        const speakOutput = 'Hello World!';
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
     }
 };
 
@@ -53,8 +38,8 @@ const HelpIntentHandler: RequestHandler = {
             && getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput: HandlerInput): Response {
-        const speakOutput = 'You can say hello to me! How can I help?';
-
+        const speakOutput = 'You can ask me what\'s for lunch!';
+        
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -69,7 +54,16 @@ const CancelAndStopIntentHandler: RequestHandler = {
                 || getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput: HandlerInput): Response {
-        const speakOutput = 'Goodbye!';
+        const goodbyes = [
+            'Goodbye!',
+            'Bye!',
+            'See you later, alligator!', 
+            'Have a great day!',
+            'See ya!',
+            'Bye bye, butterfly!',
+            'Toodles'
+        ];
+        const speakOutput = goodbyes[Math.floor(Math.random() * goodbyes.length)] ?? 'Goodbye!';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -162,7 +156,6 @@ export const handler = SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         AskAboutLunchIntentHandler,
-        HelloWorldIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
