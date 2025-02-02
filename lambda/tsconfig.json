@@ -3,7 +3,7 @@
       /* Base Options: */
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "target": "es2022",
+      "target": "ES2018",
       "resolveJsonModule": true,
       "moduleDetection": "force",
       "isolatedModules": true,
@@ -13,21 +13,18 @@
       "noUncheckedIndexedAccess": true,
   
       /* Bundled projects */
-      "lib": ["es2023"],
-      "module": "node16",
+      "lib": ["es2018"],
+      "module": "commonjs",
       "incremental": true,
   
       /* Path Aliases */
       "rootDir": ".",
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      "types": ["jest", "node"]
     },
-    // "include": [
-    //   ".eslintrc.cjs",
-    //   "**/*.ts",
-    //   "**/*.tsx",
-    //   "**/*.cjs",
-    //   "**/*.js"
-    // ],
+    "include": ["src/**/*", "test/**/*"],
     "exclude": ["node_modules"]
   }
   

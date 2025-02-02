@@ -24,4 +24,4 @@ node ./node_modules/ask-sdk-local-debug/dist/LocalDebuggerInvoker.js \
     --accessToken $ALEXA_DEBUG_TOKEN \
     --skillId $SKILL_ID \
     --handlerName handler \
-    --skillEntryFile $(pwd)/dist/index.js
+    --skillEntryFile $(pwd)/dist/src/index.js

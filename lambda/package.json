@@ -3,11 +3,12 @@
   "author": "Konstantin Klitenik",
   "license": "MIT",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && cp package.json dist",
-    "deploy": "npm run build && cd .. && ask deploy"
+    "deploy": "npm run build && cd .. && ask deploy",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "ask-sdk-core": "^2.7.0",
@@ -15,8 +16,12 @@
     "aws-sdk": "^2.326.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.12.0",
     "ask-sdk-local-debug": "^1.1.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
 }
