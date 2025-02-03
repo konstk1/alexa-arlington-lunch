@@ -39,11 +39,19 @@
           "samples": []
         },
         {
-          "slots": [],
+          "slots": [
+            {
+              "name": "date",
+              "type": "AMAZON.DATE"
+            }
+          ],
           "name": "AskAboutLunchIntent",
           "samples": [
+            "What's for lunch {date}",
+            "What's for lunch on {date}",
+            "What's for lunch at kindergarten {date}",
+            "What's for lunch at kindergarten on {date}",
             "What's for lunch",
-            "What's for lunch today",
             "What's for lunch at kindergarten"
           ]
         }

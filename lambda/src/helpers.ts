@@ -25,3 +25,11 @@ export function generateGoodbye(rhymingOnly: boolean = false) {
   const goodbyes = rhymingOnly ? rhymingGoodbyes : [...regularGoodbyes, ...rhymingGoodbyes]
   return goodbyes[Math.floor(Math.random() * goodbyes.length)] || 'Goodbye!'
 }
+
+export function dateToEasternTime(date: string) {
+  const dateObj = new Date(date)
+  if (dateObj.getUTCHours() === 0) {
+    dateObj.setHours(dateObj.getHours() + 5)
+  }
+  return dateObj
+}

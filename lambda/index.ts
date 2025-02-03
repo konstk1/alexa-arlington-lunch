@@ -5,15 +5,18 @@
  * */
 import { SkillBuilders, getRequestType, getIntentName } from 'ask-sdk-core'
 import { HandlerInput, RequestHandler, ErrorHandler as AlexaErrorHandler } from 'ask-sdk-core'
-import { Response } from 'ask-sdk-model'
-import { generateGoodbye } from './helpers'
+import { Response, IntentRequest } from 'ask-sdk-model'
+import { dateToEasternTime, generateGoodbye } from './src/helpers'
+import { getLunchMessageForToday, getLunchMessageForTomorrow } from './src/lunch'
 
 const LaunchRequestHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput): boolean {
     return getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
   },
   handle(handlerInput: HandlerInput): Response {
-    const speakOutput = 'I\'m still learning about lunch in Arlington. Try again later. ' + generateGoodbye(true)
+    const intent = handlerInput.requestEnvelope.request as IntentRequest
+
+    const speakOutput = getLunchMessageForToday() + '. ' + generateGoodbye(true)
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
@@ -28,8 +31,38 @@ const AskAboutLunchIntentHandler: RequestHandler = {
       && getIntentName(handlerInput.requestEnvelope) === 'AskAboutLunchIntent'
   },
   handle(handlerInput: HandlerInput): Response {
-    const speakOutput = 'I\'m still learning about lunch in Arlington. Try again later.'
-    return handlerInput.responseBuilder.speak(speakOutput).getResponse()
+    const intent = handlerInput.requestEnvelope.request as IntentRequest
+    const dateSlot = intent.intent.slots?.date?.value  // format: 2025-02-03
+
+    // determine if date is today or tomorrow
+    const today = new Date()
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+
+    const date = dateSlot ? dateToEasternTime(dateSlot) : new Date()
+
+    console.log('dateSlot :>> ', dateSlot)
+    console.log('date :>> ', date)
+    console.log('today :>> ', today)
+    console.log('tomorrow :>> ', tomorrow)
+
+    let speakOutput: string
+
+    if (date.getDate() === today.getDate()) {
+      speakOutput = getLunchMessageForToday()
+    } else if (date.getDate() === tomorrow.getDate()) {
+      speakOutput = getLunchMessageForTomorrow()
+    } else {
+      speakOutput = `I can only tell you about lunch for today or tomorrow.`
+    }
+
+    speakOutput += '. ' + generateGoodbye(true)
+
+    return handlerInput.responseBuilder
+      .speak(speakOutput)
+      .withShouldEndSession(true)
+      .getResponse()
   }
 }
 
@@ -39,7 +72,7 @@ const HelpIntentHandler: RequestHandler = {
       && getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent'
   },
   handle(handlerInput: HandlerInput): Response {
-    const speakOutput = 'You can ask me what\'s for lunch!'
+    const speakOutput = 'You can ask me what\'s for lunch! You can also say today or tomorrow.'
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
@@ -114,7 +147,7 @@ const IntentReflectorHandler: RequestHandler = {
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
-    //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+      //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
       .getResponse()
   }
 }
@@ -155,5 +188,5 @@ export const handler = SkillBuilders.custom()
     IntentReflectorHandler)
   .addErrorHandlers(
     ErrorHandler)
-  .withCustomUserAgent('arlington-lunch/0.0.1')
+  .withCustomUserAgent('arlington-lunch/0.0.2')
   .lambda()

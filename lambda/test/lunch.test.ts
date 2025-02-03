@@ -2,7 +2,7 @@ import { getLunchMenuForDate, Menu, getLunchMessageForToday } from '../src/lunch
 
 describe('getLunchMenuForDate', () => {
   it('should return menu for a valid date', () => {
-    const date = new Date('2025-02-03')
+    const date = new Date('2025-02-03T00:00:00-05:00')
     const expected: Menu = {
       mainMeal: 'Popcorn chicken bowl with honey wheat dinner roll',
       alternate: 'Bagel & cream cheese, yogurt, string cheese',
@@ -14,7 +14,7 @@ describe('getLunchMenuForDate', () => {
   })
 
   it('should handle menu items with commas', () => {
-    const date = new Date('2025-02-10')
+    const date = new Date('2025-02-10T00:00:00-05:00')
     const expected: Menu = {
       mainMeal: 'Chicken or vegetable dumplings with soy sauce and oven-fried brown rice',
       alternate: 'Toasted Cheese',
@@ -26,7 +26,7 @@ describe('getLunchMenuForDate', () => {
   })
 
   it('should return undefined for dates without menu', () => {
-    const date = new Date('2025-02-01') // No menu on weekends
+    const date = new Date('2025-02-01T00:00:00-05:00') // No menu on weekends (Eastern Time)
     const result = getLunchMenuForDate(date)
     expect(result).toBeUndefined()
   })
