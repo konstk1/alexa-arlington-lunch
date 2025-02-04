@@ -16,7 +16,7 @@ const LaunchRequestHandler: RequestHandler = {
   handle(handlerInput: HandlerInput): Response {
     const intent = handlerInput.requestEnvelope.request as IntentRequest
 
-    const speakOutput = getLunchMessageForToday() + '. ' + generateGoodbye(true)
+    const speakOutput = getLunchMessageForToday() + '. <break time="200ms" />' + generateGoodbye(true)
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
@@ -57,7 +57,7 @@ const AskAboutLunchIntentHandler: RequestHandler = {
       speakOutput = `I can only tell you about lunch for today or tomorrow.`
     }
 
-    speakOutput += '. ' + generateGoodbye(true)
+    speakOutput += '. <break time="200ms" />' + generateGoodbye(true)
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
