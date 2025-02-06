@@ -71,7 +71,7 @@ export function getLunchMessage(date: Date, dayLabel: string): string {
     return `I don't know what's for lunch ${dayLabel.toLowerCase()}.`
   }
 
-  return `${dayLabel}, ${vocalDate(date)}, main lunch meal is ${menu.mainMeal}`
+  return `${dayLabel}, ${vocalDate(date)}, lunch is ${menu.mainMeal}`
 }
 
 export function getLunchMessageForToday(): string {
