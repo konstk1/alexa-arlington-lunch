@@ -13,7 +13,7 @@ export type MenuByDate = {
   [date: string]: Menu
 }
 
-const lunchData = fs.readFileSync(path.join(__dirname, '../menus/2025-February.csv'), 'utf8')
+const lunchData = fs.readFileSync(path.join(__dirname, '../menus/2025-March.csv'), 'utf8')
 const dailyMenu = parseMenu(lunchData)
 
 function getDateString(date: Date): string {
