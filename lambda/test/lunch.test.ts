@@ -1,4 +1,4 @@
-import { getLunchMenuForDate, Menu, getLunchMessageForToday } from '../src/lunch'
+import { getLunchMenuForDate, Menu, getLunchMessageForToday, getLunchMessage } from '../src/lunch'
 
 describe('getLunchMenuForDate', () => {
   it('should return menu for a valid date', () => {
@@ -29,6 +29,12 @@ describe('getLunchMenuForDate', () => {
     const date = new Date('2025-02-01T00:00:00-05:00') // No menu on weekends (Eastern Time)
     const result = getLunchMenuForDate(date)
     expect(result).toBeUndefined()
+  })
+
+  it('should escape & in response', () => {
+    const date = new Date('2025-03-04T00:00:00-05:00')
+    const result = getLunchMessage(date, 'Today')
+    expect(result).toContain('&amp;')
   })
 })
 

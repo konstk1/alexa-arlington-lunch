@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { parse } from 'csv-parse/sync'
 import { dateToEasternTime } from './helpers'
+import { escapeXmlCharacters } from 'ask-sdk-core/dist/util/SsmlUtils'
 
 export type Menu = {
   mainMeal: string
@@ -71,7 +72,7 @@ export function getLunchMessage(date: Date, dayLabel: string): string {
     return `I don't know what's for lunch ${dayLabel.toLowerCase()}.`
   }
 
-  return `${dayLabel}, ${vocalDate(date)}, lunch is ${menu.mainMeal}`
+  return escapeXmlCharacters(`${dayLabel}, ${vocalDate(date)}, lunch is ${menu.mainMeal}`)
 }
 
 export function getLunchMessageForToday(): string {
